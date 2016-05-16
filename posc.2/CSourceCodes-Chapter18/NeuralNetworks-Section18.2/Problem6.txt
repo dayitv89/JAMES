@@ -1,0 +1,107 @@
+/* AN ART1 NET WITH 9 INPUT UNITS AND 2 CLUSTER UNIT */
+#include<stdio.h>
+#include<conio.h>
+main()
+{
+  float ro;
+  float b[9][3],t[2][9],s[9],x[9],sin=0,y[2],xin=0;
+  int i,j,k=0,J,c=0;
+  y[0]=0;
+  y[1]=0;
+  b[0][0]=0.33;b[1][0]=0.0;b[2][0]=0.33;
+  b[3][0]=0.0;b[4][0]=0.33;b[5][0]=0.0;
+  b[6][0]=0.33;b[7][0]=0.0;b[8][0]=0.33;
+  
+  b[0][1]=0.1;b[1][1]=0.1;b[2][1]=0.1;
+  b[3][1]=0.1;b[4][1]=0.1;b[5][1]=0.1;
+  b[6][1]=0.1;b[7][1]=0.1;b[8][1]=0.1;
+
+
+  t[0][0]=1.0;t[0][1]=0;t[0][2]=1.0;t[0][3]=0;
+  t[0][4]=1.0;t[0][5]=0;t[0][6]=1.0;t[0][7]=0;
+  t[0][8]=1.0;
+
+  t[1][0]=1;t[1][1]=1;t[1][2]=1;t[1][3]=1;
+  t[1][4]=1;t[1][5]=1;t[1][6]=1;t[1][7]=1;
+  t[1][8]=1;
+
+  clrscr();
+  mew:
+   printf("Enter the value of ro\n");
+   scanf("%f",&ro);
+   printf("Enter the input value\n");
+   for(i=0;i<=8;i++)
+   {
+     scanf("%f",&s[i]);
+     x[i]=s[i];
+   }
+   sin=s[0]+s[1]+s[2]+s[3]+s[4]+s[5]+s[6]+s[7]+s[8];
+   for(i=0;i<=1;i++)
+   {
+    do
+    {
+    y[i]+=s[k]*b[k][i];
+    k+=1;
+    }while(k<=8);
+    k=0;
+   }
+   for(i=0;i<=1;i++)
+    printf("\tyin=%f",y[i]);
+    if(y[0]>=y[1])
+     J=0;
+else
+  J=1;
+printf("J=%d",J);
+  
+   me:
+   for(i=0;i<=8;i++)
+   {
+     x[i]=s[i]*t[J][i];
+   }
+   xin=x[0]+x[1]+x[2]+x[3]+x[4]+x[5]+x[6]+x[7]+x[8];
+    if((xin/sin)>= ro)
+    {
+      for(i=0;i<=8;i++)
+      {
+	b[i][J]=(2*x[i])/(1+xin);
+	t[J][i]=x[i];
+      }
+    }
+    else
+    {
+      y[J]=-1;
+      xin=0;
+      goto me;
+   }
+   printf("\nBottom up weights\n");
+   for(i=0;i<=8;i++)
+   {
+    for(j=0;j<=1;j++)
+    {
+      printf("%f\t",b[i][j]);
+    }
+    printf("\n");
+   }
+   printf("\nTop down Weights\n");
+   for(i=0;i<=1;i++)
+   {
+     for(j=0;j<=8;j++)
+     {
+       printf("%f\t",t[i][j]);
+     }
+     printf("\n");
+   }
+   getch();
+   y[0]=0;
+   y[1]=0;
+   y[2]=0;
+   sin=xin=0;
+   c+=1;
+   k=0;
+   if(c<=2)
+     goto mew;
+     getch();
+  }
+
+
+

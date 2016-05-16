@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<alloc.h>
+
+struct SET
+{
+  char *elts;
+  int n;
+};
+typedef struct SET set;
+set s;
+
+void getval(set m,char x)
+{
+   int i;
+   printf("\n Enter the %c:\n",x);
+   for(i=0;i2*s.n)
+   {
+     printf("\n Invalid values");
+     getch();
+     exit(0);
+   }
+   a.elts=(char *) malloc(a.n);
+   b.elts=(char *) malloc(b.n);
+   getval(s,'S');
+   getval(a,'A');
+   getval(b,'B');
+
+   while(1)
+   {
+     printf("\n Menu:\n 1.AUB\n 2.A^B\n 3.A~\n 4.B~ \n 5.Print S,A,B\n                                    6.Exit");
+
+
+     switch((ch=getch()))
+     {
+       case '1':
+	   ans=unionset(a,b);
+	   printval(ans,'U');
+	   getch();
+	   break;
+       case '2':
+	   ans=interset(a,b);
+	   printval(ans,'^');
+	   getch();
+	   break;
+       case '3':
+	   ans=complement(a);
+	   printval(ans,'a');
+	   getch();
+	   break;
+       case '4':
+	   ans=complement(b);
+	   printval(ans,'b');
+	   getch();
+	   break;
+       case '5':
+	   printval(s,'S');
+	   printval(a,'A');
+	   printval(b,'B');
+	   getch();
+	   break;
+       case '6':
+	   exit(0);
+     }
+   }
+}

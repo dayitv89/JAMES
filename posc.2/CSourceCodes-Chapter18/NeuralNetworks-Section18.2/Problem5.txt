@@ -1,0 +1,85 @@
+// A KSOM to cluster four input vectors
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+  signed int x[4][2];
+  float w[4][2],d1,d2,o,m=0;
+  int i,j,k,J;
+  float alp=0.6;
+  clrscr();
+  printf("Enter the input:");
+  for(i=0;i<=3;i++)
+  {
+     for(j=0;j<=3;j++)
+     {
+       scanf("%d",&x[i][j]);
+     }
+  }
+  printf("Enter the Weight matrix:");
+  for(i=0;i<=3;i++)
+  {
+    for(j=0;j<=1;j++)
+    {
+      scanf("%f",&o);
+      w[i][j]=0;
+    }
+  }
+  mew:
+  for(i=0;i<=3;i++)
+  {
+    for(k=0;k<=1;k++)
+    {
+      for(j=0;j<=3;j++)
+      {
+	if(k==0)
+	  d1+=(w[j][k]-x[i][j])*(w[j][k]-x[i][j]);
+	else
+	  d2+=(w[j][k]-x[i][j])*(w[j][k]-x[i][j]);
+
+      }
+    }
+    if(d1>d2)
+      J=1;
+    else
+      J=0;
+      d1=d2=0;
+    for(j=0;j<=3;j++)
+    {
+      w[j][J]+=alp*(x[i][j]-w[j][J]);
+    }
+    getch();
+    }
+    alp=alp/1.014;
+    if(m>=100)
+    {
+      for(i=0;i<=3;i++)
+	 {
+	   for(j=0;j<=1;j++)
+	   {
+	     printf("\n%f\t",w[i][j]);
+	   }
+	   getch();
+	 }
+    }
+    else
+    {
+	 m=m+1;
+	 for(i=0;i<=3;i++)
+	 {
+	   for(j=0;j<=1;j++)
+	  {
+	   printf("\n%f\t",w[i][j]);
+	  }
+	  printf("\n");
+	 }
+     getch();
+     goto mew;
+     }
+   getch();
+ }
+
+
+
+
+

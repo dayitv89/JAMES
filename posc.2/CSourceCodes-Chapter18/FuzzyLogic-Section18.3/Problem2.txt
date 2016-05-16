@@ -1,0 +1,150 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+
+struct SET
+{
+  char *elts;
+  int n;
+};
+
+typedef struct SET set;
+set s;
+
+void getval(set m,char *x)
+{
+   int i;
+   printf("\n Enter the %s:\n",x);
+   for(i=0;i3*s.n)
+   {
+     printf("\n Invalid values");
+     getch();
+     exit(0);
+   }
+   a.elts=(char *) malloc(a.n);
+   b.elts=(char *) malloc(b.n);
+   c.elts=(char *) malloc(a.n);
+   getval(s,"S");
+   getval(a,"A");
+   getval(b,"B");
+   getval(c,"C");
+   clrscr();
+     printf("\n Menu: \n 1.DeMorgan's Law\
+		      \n 2.Associative Law\
+		      \n 3.Distributive Law\
+		      \n 4.Commutative Law\
+		      \n 5.Exit");
+
+   while(1)
+   {
+     switch((ch=getch()))
+     {
+       case '1':
+	   clrscr();
+	   printf("\n DeMorgan's Law:(A^B)~=A~UB~");
+	   t1=intersect(a,b);
+	   printval(t1,"A^B");
+	   t2=complement(t1);
+	   printval(t2,"(A^B)~");
+
+	   t1=complement(a);
+	   printval(t1,"A~");
+	   t4=complement(a);
+	   t2=complement(b);
+	   printval(t2,"B~");
+	   ans=unionset(t1,t2);
+	   printval(ans,"A~UB~");
+
+
+	   printf("\n DeMorgan's Law:(AUB)~=A~ ^ B~");
+	   t1=unionset(a,b);
+	   printval(t1,"AUB");
+	   ans=complement(t1);
+	   printval(t2,"(AUB)~");
+
+	   t1=complement(a);
+	   printval(t1,"A~");
+	   t2=complement(b);
+	   printval(t2,"B~");
+	   ans=intersect(t1,t2);
+	   printval(ans,"A~ ^ B~");
+	   break;
+       case '2':
+	   clrscr();
+	   printf("\n Associative Law:(A^B)^C = A^(B^C)");
+	   t1=intersect(a,b);
+	   printval(t1,"A^B");
+	   t2=intersect(t1,c);
+	   printval(t2,"(A^B)^C");
+
+	   t1=intersect(b,c);
+	   printval(t1,"B^C");
+	   t2=intersect(t1,a);
+	   printval(t2,"A^(B^C)");
+
+	   printf("\n Associative Law:(AUB)UC = AU(BUC)");
+	   t1=unionset(a,b);
+	   printval(t1,"AUB");
+	   t2=unionset(t1,c);
+	   printval(t2,"(AUB)UC");
+
+	   t1=unionset(b,c);
+	   printval(t1,"BUC");
+	   t2=unionset(t1,a);
+	   printval(t2,"AU(BUC)");
+	   break;
+       case '3':
+	   clrscr();
+	   printf("\n Distributive Law:(AUB)^C = (A^B) U (A^C)");
+	   t1=unionset(a,b);
+	   printval(t1,"AUB");
+	   t2=intersect(t1,c);
+	   printval(t2,"(AUB)^C");
+
+	   t1=intersect(a,b);
+	   printval(t1,"A^B");
+	   t2=intersect(a,c);
+	   printval(t1,"A^C");
+	   ans=unionset(t1,t2);
+	   printval(ans,"(A^B)U(A^C)");
+
+	   printf("\n Distributive Law:(A^B)U C=(AUB)^(AUC)");
+	   t1=intersect(a,b);
+	   printval(t1,"A^B");
+	   t2=unionset(t1,c);
+	   printval(t2,"(A^B)UC");
+
+	   t1=unionset(a,b);
+	   printval(t1,"AUB");
+	   t2=unionset(a,c);
+	   printval(t1,"AUC");
+	   t2=intersect(t1,t2);
+	   printval(t2,"(AUB)^(AUC)");
+	   break;
+       case '4':
+	   printf("\n Commutative Law: AUB=BUA");
+	   t1=unionset(a,b);
+	   printval(t1,"AUB");
+	   t1=unionset(b,a);
+	   printval(t1,"BUA");
+
+	   printf("\n Commutative Law: A^B=B^A");
+	   t1=intersect(a,b);
+	   printval(t1,"A^B");
+	   t1=intersect(b,a);
+	   printval(t1,"B^A");
+	   break;
+       case '5':
+	   exit(0);
+       default:
+	   putch('\a');
+     }
+     putch('\n');
+     printval(s,"S");
+     printval(a,"A");
+     printval(b,"B");
+     printval(c,"C");
+     getch();
+   }
+}
